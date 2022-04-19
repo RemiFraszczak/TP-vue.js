@@ -7,13 +7,13 @@ Vue.use(Vuex)
 const state = {
     data: []
 }
-
+/* pour garder les données mis à jour*/
 const mutations = {
     RECEIVE_CHARACTERS(state, { characters }) {
         state.data = characters
     }
 }
-
+/* lors d'une action sur les données*/
 const actions = {
     async FETCH_CHARACTERS({ commit }, name) {
         const url = `https://rickandmortyapi.com/api/character/${name}`
@@ -21,7 +21,7 @@ const actions = {
         commit('RECEIVE_CHARACTERS', { characters: data.results })
     }
 }
-
+/*récupérer les données */
 const getters = {
     characters: state => {
         return state.data.map(data => {

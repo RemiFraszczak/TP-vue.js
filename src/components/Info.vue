@@ -1,4 +1,3 @@
-
 <template>
 <div v-if="!!characters.length" class="characters-list"></div>
   <div class="wrapper">
@@ -16,7 +15,6 @@
 <script>
 import { defineComponent } from "vue";
 import axios from "axios";
-
 export default defineComponent({
   data() {
     return {
@@ -35,7 +33,6 @@ export default defineComponent({
       const params = {
         page: this.page,
       };
-
       const url = "https://rickandmortyapi.com/api/character";
       return axios
         .get(url, { params })
@@ -69,7 +66,6 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   color: #2c3e50;
   margin-top: 60px;
 }

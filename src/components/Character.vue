@@ -1,7 +1,10 @@
 <template>
+  <button v-on:click="page(numPage++)">Suivant</button>
+  <button v-on:click="page(numPage--)">Retour</button>
   <div v-if="!!characters.length" class="characters-list"></div>
+   <!--wrapper pour aligner les images -->
   <div class="wrapper">
-    <div v-for="character in characters" :key="character.name" class="characters-search">
+    <div v-for="character in getCharacter" :key="character.name" class="characters-search">
       <div class="image">
         <img :src="character.image" />
       </div>
@@ -13,6 +16,7 @@
 </template>
 
 <script>
+
 import { defineComponent } from "vue";
 import axios from "axios";
 
@@ -20,33 +24,52 @@ export default defineComponent({
   data() {
     return {
       characters: [],
+      numPage: 1
     };
   },
   created() {
     this.fetch();
+  },
+
+  computed: {
+    getCharacter(){
+      return this.characters
+    }
   },
   methods: {
     addCharacter() {
       this.$store.commit("addCharacter", this.newCharacter);
       this.newCharacter = "";
     },
+    page(id) {
+      const url = `https://rickandmortyapi.com/api/character/?page=${id}`
+      
+         return axios
+        .get(url)
+        .then((res) => {
+          this.characters = res.data.results;
+          this.pages = res.data.info.pages;
+        })
+        .catch(console.log);
+    },
     fetch() {
       const params = {
-        page: this.page,
-      };
+    
+      }
       /*je récupere les données des personnages */
-      const url = "https://rickandmortyapi.com/api/character";
+      const url = "https://rickandmortyapi.com/api/character/";
       return axios
         .get(url, { params })
         .then((res) => {
           this.characters = res.data.results;
-          
+          this.pages = res.data.info.pages;
         })
         .catch(console.log);
     },
-    async fetchOne(id) {
+    
+    async LoadCharacter(count) {
       await axios
-        .get(`https://rickandmortyapi.com/api/character/${id}/`)
+        .get(`https://rickandmortyapi.com/api/character/${pages}/`)
         .then((res) => {
           this.currentCharacter = res.data;
         })
