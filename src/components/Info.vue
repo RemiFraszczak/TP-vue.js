@@ -1,17 +1,18 @@
-<template>
-  <div v-if="!!characters.length" class="characters-list"></div>
-  <div class="wrapper">
-    <div v-for="character in characters" :key="character.name" class="characters-search">
-      <div class="image">
-        <img :src="character.image" />
-      </div>
-      <div class="name">Nom : {{ character.name }}</div>
-      <div><router-link :to="{name :'test', params:{id : character.id}}">more infos</router-link></div>
-    </div>
-  </div>
-  
-</template>
 
+<template>
+<div v-if="!!characters.length" class="characters-list"></div>
+  <div class="wrapper">
+    <div
+      v-for="character in characters"
+      :key="character.name"
+      class="characters-search"
+    >
+      <div class="sexe">Sexe : {{ character.gender }}</div>
+      <div class="status">Status : {{ character.status }}</div>
+      <div class="episode">Nb Episodes : {{ character.episode.length }}</div>
+      </div>
+      </div>
+</template>
 <script>
 import { defineComponent } from "vue";
 import axios from "axios";

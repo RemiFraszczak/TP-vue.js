@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from "vue-router";
 // Dans ce cas, ce sera Accueil et Details
 import Character from "./components/Character.vue";
 import App from "./App.vue";
+import Info from "./components/Info.vue";
+import { initCustomFormatter } from "vue";
 
 // Nous créons d'abord nos Routes
 const routes = [
@@ -10,15 +12,18 @@ const routes = [
     // Nous disons à Vue que c'est la page racine
     // Donc, la racine de votre application
     // Affichera le composant "Home.vue"
-    {
-        path: "/",
-        component: App,
-    },
+
     // Ici, nous disons que pour la route "/details"
     // Nous afficherons le composant "Details.vue"
     {
-        path: "/components",
+        path: "/",
         component: Character,
+    },
+
+    {
+        name:'test',
+        path: "/component/:id",
+        component: Info,
     },
 ];
 
