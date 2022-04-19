@@ -13,6 +13,13 @@
       <div class="sexe">Sexe : {{ character.gender }}</div>
       <div class="status">Status : {{ character.status }}</div>
       <div class="episode">Nb Episodes : {{ character.episode.length }}</div>
+      <div class="extra content">
+        <span class="right floated">
+          <a target="_blank" :href="character.url">
+            <button class="ui icon purple tiny button">More Info</button>
+          </a>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -46,16 +53,16 @@ export default defineComponent({
         .then((res) => {
           this.characters = res.data.results;
           this.pages = res.data.info.pages;
-          console.log(res.data.info);
         })
         .catch(console.log);
     },
     async fetchOne(id) {
-      const result = await axios.get(
-        `https://rickandmortyapi.com/api/character/${id}/`
-      );
-      this.currentCharacter = result.data;
-      console.log(this.currentCharacter);
+      await axios
+        .get(`https://rickandmortyapi.com/api/character/${id}/`)
+        .then((res) => {
+          this.currentCharacter = res.data;
+        })
+        .catch(console.log);
     },
   },
 });
