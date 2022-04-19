@@ -34,13 +34,13 @@ export default defineComponent({
       const params = {
         page: this.page,
       };
-
+      /*je récupere les données des personnages */
       const url = "https://rickandmortyapi.com/api/character";
       return axios
         .get(url, { params })
         .then((res) => {
           this.characters = res.data.results;
-          this.pages = res.data.info.pages;
+          
         })
         .catch(console.log);
     },
